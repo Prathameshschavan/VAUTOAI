@@ -20,3 +20,16 @@ export const addOutward = async (req, res) => {
     res.status(500).send("something went wrong please try again");
   }
 };
+
+export const getOutward = async (req, res) => {
+  try {
+    const outwards = await Outward.find();
+    return res.status(201).json({
+      response: outwards,
+      message: "Here are your outwards",
+    });
+  } catch (error) {
+    console.log(error)
+    res.status(500).send("something went wrong please try again");
+  }
+};
