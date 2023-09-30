@@ -28,16 +28,36 @@ export const updateAsset = async (req, res) => {
   }
 };
 
-export const getAsset = async (req, res) => {
-  try {
-    const assets = await Asset.find();
+// export const getAsset = async (req, res) => {
+//   try {
+//     const assets = await Asset.find();
    
-    return res.status(201).json({
-      response: assets,
-      message: "Here are your assets",
-    });
+//     return res.status(201).json({
+//       response: assets,
+//       message: "Here are your assets",
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send("something went wrong please try again");
+//   }
+// };
+
+export const getAsset = async (req, res) => {
+  const q = req.query;
+  try {
+    let allAsset = [];
+    if (q.sort) {
+      allAsset = await Asset.find().sort({
+        buyingDate: `${q.sort == "asc" ? -1 : 1}`,
+      });
+    } else {
+      allAsset = await Asset.find();
+    }
+    res.status(201).send(allAsset);
   } catch (error) {
     console.log(error);
-    res.status(500).send("something went wrong please try again");
+    res
+      .status(500)
+      .send("something went wrong while getting all the data check in");
   }
 };
