@@ -17,17 +17,12 @@ export const addAsset = async (req, res) => {
 
 export const updateAsset = async (req, res) => {
   try {
-    const updatedAsset = await Asset.findOneAndUpdate(
-      { id: req.params.id },
-      req.body
-    );
-    return res.status(201).json({
-      response: updatedAsset,
-      message: "Asset Updated successfully",
-    });
+    await Asset.findByIdAndUpdate(req.params.id, req.body);
+    res.status(201).send("asset updated successfully");
   } catch (error) {
-    console.log(error);
-    res.status(500).send("something went wrong please try again");
+    res
+      .status(500)
+      .send("something went wrong while updating the asset");
   }
 };
 

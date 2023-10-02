@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/out", addMovementOut);
 router.post("/in", addMovementIn);
 router.delete("/delete/:id", deleteMovementIN);
-router.get("/allCheckIns", getAllMovementIns);
+router.get("/", getAllMovementIns);
 router.put("/updateCheckIn/:id", updateMovementIn);
 
 export default router;
