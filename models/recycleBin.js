@@ -9,6 +9,8 @@ const recycleBinSchema = new Schema({
         type:Object,
         required:true
     }
+},{
+    timestamps:true
 })
 
 export default mongoose.model("RecycleBin", recycleBinSchema);

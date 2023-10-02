@@ -5,7 +5,8 @@ import inwardRoutes from "./routes/inward.route.js";
 import movementRoutes from "./routes/movement.route.js";
 import userRoute from "./routes/user.route.js";
 import assetRoute from "./routes/asset.route.js";
-import outwardRouter from "./routes/outward.route.js"
+import outwardRouter from "./routes/outward.route.js";
+import recycleRouter from "./routes/recycle.route.js";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
@@ -24,7 +25,7 @@ const connect = async () => {
 };
 
 app.use(express.json());
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors({ origin: "*", credentials: true,methods:["GET","POST","PUT","PATCH","DELETE"]}));
 
 app.use("/api/visit", checkRoute);
 app.use("/api/inward", inwardRoutes);
@@ -32,6 +33,7 @@ app.use("/api/movement", movementRoutes);
 app.use("/api/auth", userRoute);
 app.use("/api/asset", assetRoute);
 app.use("/api/outward", outwardRouter);
+app.use("/api/recycle", recycleRouter);
 
 const PORT = process.env.PORT;
 

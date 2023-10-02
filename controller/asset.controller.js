@@ -17,14 +17,12 @@ export const addAsset = async (req, res) => {
 
 export const updateAsset = async (req, res) => {
   try {
-    const updatedAsset = await Asset.findOneAndUpdate({id:req.params.id},req.body); 
-    return res.status(201).json({
-      response: updatedAsset,
-      message: "Asset Updated successfully",
-    });
+    await Asset.findByIdAndUpdate(req.params.id, req.body);
+    res.status(201).send("asset updated successfully");
   } catch (error) {
-    console.log(error);
-    res.status(500).send("something went wrong please try again");
+    res
+      .status(500)
+      .send("something went wrong while updating the asset");
   }
 };
 
@@ -54,10 +52,10 @@ export const deleteAsset = async (req, res) => {
   try {
     const asset = await Asset.find({_id:req.params.id});
     await RecycleBin.create({path:"asset",item:asset[0]});
-    await Asset.findByIdAndDelete(req.params.id);
+    await Asset.findByIdAndDelete(req.params.id); 
     res.status(201).send("Inward information is deleted");
   } catch (error) {
     console.log(error);
     res.status(500).send("something went wrong while deleting Inward in");
   }
-};
+}; 
