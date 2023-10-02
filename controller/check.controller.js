@@ -1,17 +1,51 @@
 import Check from "../models/check.model.js";
 import RecycleBin from "../models/recycleBin.js";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
+
+const transports = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "cprathamesh94@gmail.com",
+    pass: process.env.GOOGLE_PASS,
+  },
+});
+
 export const addCheckIn = async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const checkInData = new Check(req.body);
+    await sendEmail("prathameshschavan029@gmail.com");
     const savedCheckIn = await checkInData.save();
-    return res
-      .status(201)
-      .json({ response: savedCheckIn, message: "Check-In added successfully" });
+    return res.status(201).json({ response: savedCheckIn, message: "Check-In added successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).send("something went wrong please try again");
   }
+};
+
+export const sendEmail = async (email) => {
+  transports
+  .sendMail({
+    to: email,
+    from: "cprathamesh94@gmail.com",
+    subject: "OTP Verification",
+    html:`<div style="text-align:center">
+    <h1>SomeOne is trying to meet you</h1>
+    <p>Please confirm your availabilty.....</p>
+    <button>OK</button>
+    </div>`
+  })
+  .then((result) => {
+    console.log(result)
+    // req.session.OTP = otp;
+    // res.send("Email Sent");
+  })
+  .catch((err) => {
+    console.log(err)
+    // res.send("Something wrong Happened")
+  });
 };
 
 export const addCheckOut = async (req, res) => {
@@ -22,12 +56,10 @@ export const addCheckOut = async (req, res) => {
       { $set: { checkOut: checkOut } }
     );
     checkOutData.checkOut = checkOut;
-    return res
-      .status(201)
-      .json({
-        response: checkOutData,
-        message: "Check-Out added successfully",
-      });
+    return res.status(201).json({
+      response: checkOutData,
+      message: "Check-Out added successfully",
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).send("something went wrong please try again");
@@ -47,7 +79,7 @@ export const getAllCheckIns = async (req, res) => {
     }
     res.status(201).send(allCheckIns);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res
       .status(500)
       .send("something went wrong while getting all the data check in");
@@ -65,8 +97,7 @@ export const updateCheckIn = async (req, res) => {
   }
 };
 
-
-// Delete 
+// Delete
 
 export const deleteCheckIN = async (req, res) => {
   try {

@@ -40,7 +40,7 @@ export const getAllMovementIns = async (req, res) => {
     let allMovements = [];
     if (q.sort) {
       allMovements = await Movement.find().sort({
-        outTime: `${q.sort == "asc" ? -1 : 1}`,
+        inTime: `${q.sort == "asc" ? 1 : -1}`,
       });
     } else {
       allMovements = await Movement.find();
