@@ -1,4 +1,5 @@
 import Movement from "../models/movement.model.js";
+import RecycleBin from "../models/recycleBin.js";
 
 export const addMovementOut = async (req, res) => {
   try {
@@ -33,18 +34,6 @@ export const addMovementIn = async (req, res) => {
   }
 };
 
-export const deleteMovementIN = async (req, res) => {
-  try {
-    await Movement.findByIdAndDelete(req.params.id);
-    console.log(req.params.id);
-    res.status(201).send("Movementin information is deleted");
-  } catch (error) {
-    res.status(500).send("something went wrong while deleting Movement in");
-  }
-};
-
-
-
 export const getAllMovementIns = async (req, res) => {
   const q = req.query;
   try {
@@ -72,5 +61,18 @@ export const updateMovementIn = async (req, res) => {
     res
       .status(500)
       .send("something went wrong while updating the Movement in Movement in");
+  }
+};
+
+// Delete 
+export const deleteMovementIN= async (req, res) => {
+  try {
+    const movement = await Movement.find({ _id: req.params.id });
+    await RecycleBin.create({ path: "movement", item: movement[0] });
+    await Movement.findByIdAndDelete(req.params.id);
+    res.status(201).send("Movement information is deleted");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong while deleting Movement information");
   }
 };

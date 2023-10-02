@@ -1,12 +1,18 @@
-import express from "express"
-import {addMovementIn, updateMovementIn,deleteMovementIN, getAllMovementIns, addMovementOut} from "../controller/movement.controller.js"
+import express from "express";
+import {
+  addMovementIn,
+  updateMovementIn,
+  deleteMovementIN,
+  getAllMovementIns,
+  addMovementOut,
+} from "../controller/movement.controller.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", getAllMovementIns)
-router.post("/out", addMovementOut );
-router.post("/in", addMovementIn )
-router.delete("/delteCheck/:id", deleteMovementIN)
-router.put("/updateCheckIn/:id", updateMovementIn)
+router.post("/out", addMovementOut);
+router.post("/in", addMovementIn);
+router.delete("/delete/:id", deleteMovementIN);
+router.get("/", getAllMovementIns);
+router.put("/updateCheckIn/:id", updateMovementIn);
 
 export default router;
