@@ -23,7 +23,6 @@ export const addOutward = async (req, res) => {
   }
 };
 
-
 export const getOutward = async (req, res) => {
   const q = req.query;
   try {
@@ -42,18 +41,14 @@ export const getOutward = async (req, res) => {
   }
 };
 
-
 export const updateOutward = async (req, res) => {
   try {
     await Outward.findByIdAndUpdate(req.params.id, req.body);
     res.status(201).send("outward updated successfully");
   } catch (error) {
-    res
-      .status(500)
-      .send("something went wrong while updating the outward");
+    res.status(500).send("something went wrong while updating the outward");
   }
 };
-
 
 export const deleteOutward = async (req, res) => {
   try {
