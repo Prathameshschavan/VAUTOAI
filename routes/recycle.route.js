@@ -3,6 +3,6 @@ import { getRecycle } from "../controller/recycleBin.controller.js";
 const router =  express.Router();
 
 router.get("/", getRecycle);
-router.post("/restore/:id", getRecycle);
+router.post("/restore/:id", );
 
 export default router;
