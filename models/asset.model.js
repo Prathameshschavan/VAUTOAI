@@ -3,59 +3,59 @@ import mongoose from "mongoose";
 const assetSchema = new mongoose.Schema({
   productName: {
     type: String,
-    required: true
+    required: true,
   },
   quantity: {
     type: Number,
-    required: true
+    required: true,
   },
-  type:{
+  type: {
     type: String,
-    required: true
+    required: true,
   },
   condition: {
     type: String,
-    required: false
+    required: false,
   },
   staffName: {
     type: String,
-    required: false
+    required: false,
   },
   department: {
     type: String,
-    required: false
+    required: false,
   },
   floor: {
     type: String,
-    required: false
+    required: false,
   },
   tags: {
     type: [String],
-    required: false
+    required: false,
   },
   returnDate: {
     type: String,
-    required: false
+    required: false,
   },
   buyingDate: {
     type: String,
-    required: false
+    required: false,
   },
-  expiryDate: { 
+  expiryDate: {
     type: String,
-    required: false
+    required: false,
   },
   invoicePhoto: {
     type: String,
-    required: true
+    required: true,
   },
   remark: {
     type: String,
-    required: false
+    required: false,
   },
   qrDetails: {
     type: String,
-    required: false
+    required: false,
   },
 });
 

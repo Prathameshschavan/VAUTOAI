@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post("/add", addInward);
 
-router.delete("/delteCheck/:id", deleteInwardIN);
+router.delete("/delete/:id", deleteInwardIN);
 
 router.get("/allCheckIns", getAllInwards);
 router.put("/updateCheckIn/:id", updateInwardIn);

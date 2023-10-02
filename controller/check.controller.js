@@ -1,5 +1,5 @@
 import Check from "../models/check.model.js";
-
+import RecycleBin from "../models/recycleBin.js";
 export const addCheckIn = async (req, res) => {
   try {
     console.log(req.body)
@@ -34,16 +34,6 @@ export const addCheckOut = async (req, res) => {
   }
 };
 
-export const deleteCheckIN = async (req, res) => {
-  try {
-    await Check.findByIdAndDelete(req.params.id);
-    console.log(req.params.id);
-    res.status(201).send("checkin information is deleted");
-  } catch (error) {
-    res.status(500).send("something went wrong while deleting check in");
-  }
-};
-
 export const getAllCheckIns = async (req, res) => {
   const q = req.query;
   try {
@@ -72,5 +62,20 @@ export const updateCheckIn = async (req, res) => {
     res
       .status(500)
       .send("something went wrong while updating the check in check in");
+  }
+};
+
+
+// Delete 
+
+export const deleteCheckIN = async (req, res) => {
+  try {
+    const check = await Check.find({ _id: req.params.id });
+    await RecycleBin.create({ path: "check", item: check[0] });
+    await Check.findByIdAndDelete(req.params.id);
+    res.status(201).send("Checkin information is deleted");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong while deleting Checkin in");
   }
 };

@@ -17,7 +17,10 @@ export const addAsset = async (req, res) => {
 
 export const updateAsset = async (req, res) => {
   try {
-    const updatedAsset = await Asset.findOneAndUpdate({id:req.params.id},req.body); 
+    const updatedAsset = await Asset.findOneAndUpdate(
+      { id: req.params.id },
+      req.body
+    );
     return res.status(201).json({
       response: updatedAsset,
       message: "Asset Updated successfully",
@@ -27,8 +30,6 @@ export const updateAsset = async (req, res) => {
     res.status(500).send("something went wrong please try again");
   }
 };
-
-
 
 export const getAsset = async (req, res) => {
   const q = req.query;
@@ -52,12 +53,12 @@ export const getAsset = async (req, res) => {
 
 export const deleteAsset = async (req, res) => {
   try {
-    const asset = await Asset.find({_id:req.params.id});
-    await RecycleBin.create({path:"asset",item:asset[0]});
+    const asset = await Asset.find({ _id: req.params.id });
+    await RecycleBin.create({ path: "asset", item: asset[0] });
     await Asset.findByIdAndDelete(req.params.id);
-    res.status(201).send("Inward information is deleted");
+    res.status(201).send("Asset information is deleted");
   } catch (error) {
     console.log(error);
-    res.status(500).send("something went wrong while deleting Inward in");
+    res.status(500).send("something went wrong while deleting Asset");
   }
 };
