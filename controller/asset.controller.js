@@ -1,4 +1,5 @@
 import Asset from "../models/asset.model.js";
+import RecycleBin from "../models/recycleBin.js";
 
 export const addAsset = async (req, res) => {
   try {
@@ -51,6 +52,8 @@ export const getAsset = async (req, res) => {
 
 export const deleteAsset = async (req, res) => {
   try {
+    const asset = await Asset.find({_id:req.params.id});
+    await RecycleBin.create({path:"asset",item:asset[0]});
     await Asset.findByIdAndDelete(req.params.id);
     res.status(201).send("Inward information is deleted");
   } catch (error) {
