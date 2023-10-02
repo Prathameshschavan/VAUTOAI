@@ -8,4 +8,4 @@ router.post("/out", addOutward );
 router.delete("/delete/:id", deleteOutward );
 router.put("/update/:id", updateOutward );
 
-export default router;
+export default router;  

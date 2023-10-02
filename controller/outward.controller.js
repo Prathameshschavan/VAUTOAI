@@ -21,16 +21,24 @@ export const addOutward = async (req, res) => {
   }
 };
 
+
 export const getOutward = async (req, res) => {
+  const q = req.query;
   try {
-    const outwards = await Outward.find();
-    return res.status(201).json({
-      response: outwards,
-      message: "Here are your outwards",
-    });
+    let allOutward = [];
+    if (q.sort) {
+      allOutward = await Outward.find().sort({
+        outDateAndTime: `${q.sort == "asc" ? -1 : 1}`,
+      });
+    } else {
+      allOutward = await Outward.find();
+    }
+    res.status(201).send(allOutward);
   } catch (error) {
-    console.log(error)
-    res.status(500).send("something went wrong please try again");
+    console.log(error);
+    res
+      .status(500)
+      .send("something went wrong while getting all the data check in");
   }
 };
 
@@ -46,13 +54,11 @@ export const deleteOutward = async (req, res) => {
 
 export const updateOutward = async (req, res) => {
   try {
-    const updatedOutward = await Outward.findOneAndUpdate({id:req.params.id},req.body); 
-    return res.status(201).json({
-      response: updatedOutward,
-      message: "Outward Updated successfully",
-    });
+    await Outward.findByIdAndUpdate(req.params.id, req.body);
+    res.status(201).send("outward updated successfully");
   } catch (error) {
-    console.log(error);
-    res.status(500).send("something went wrong please try again");
+    res
+      .status(500)
+      .send("something went wrong while updating the outward");
   }
 };

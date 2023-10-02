@@ -42,21 +42,26 @@ export const deleteMovementIN = async (req, res) => {
     res.status(500).send("something went wrong while deleting Movement in");
   }
 };
+
+
+
 export const getAllMovementIns = async (req, res) => {
   const q = req.query;
-
-  const filter = {
-    ...(q.isFinished && { isFinished: q.isFinished }),
-  };
-
   try {
-    const allMovementIns = await Movement.find(filter);
-    // console.log(allMovementIns)
-    res.status(201).send(allMovementIns);
+    let allMovements = [];
+    if (q.sort) {
+      allMovements = await Movement.find().sort({
+        outTime: `${q.sort == "asc" ? -1 : 1}`,
+      });
+    } else {
+      allMovements = await Movement.find();
+    }
+    res.status(201).send(allMovements);
   } catch (error) {
+    console.log(error);
     res
       .status(500)
-      .send("something went wrong while getting all the data Movement in");
+      .send("something went wrong while getting all the data check in");
   }
 };
 export const updateMovementIn = async (req, res) => {
