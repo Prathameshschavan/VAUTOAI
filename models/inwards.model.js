@@ -26,13 +26,9 @@ const inwardSchema = new Schema({
     type: String,
     required: false,
   },
-  productName: {
-    type: String,
-    required: true
-  },
-  quantity: {
-    type: Number,
-    required: true,
+  productDetail:{
+     type: [{}],
+     required:true
   },
   broughtBy: {
     type: String,

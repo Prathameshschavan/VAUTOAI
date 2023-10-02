@@ -16,8 +16,7 @@ export const addAsset = async (req, res) => {
 
 export const updateAsset = async (req, res) => {
   try {
-    const { _id, condition, staffName, department, floor, tags, returnDate} = req.body;
-    const updatedAsset = await Asset.findOneAndUpdate({_id:_id},{$set:{condition,staffName,department,floor,tags,returnDate}}); 
+    const updatedAsset = await Asset.findOneAndUpdate({id:req.params.id},req.body); 
     return res.status(201).json({
       response: updatedAsset,
       message: "Asset Updated successfully",
@@ -28,19 +27,7 @@ export const updateAsset = async (req, res) => {
   }
 };
 
-// export const getAsset = async (req, res) => {
-//   try {
-//     const assets = await Asset.find();
-   
-//     return res.status(201).json({
-//       response: assets,
-//       message: "Here are your assets",
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send("something went wrong please try again");
-//   }
-// };
+
 
 export const getAsset = async (req, res) => {
   const q = req.query;
@@ -59,5 +46,15 @@ export const getAsset = async (req, res) => {
     res
       .status(500)
       .send("something went wrong while getting all the data check in");
+  }
+};
+
+export const deleteAsset = async (req, res) => {
+  try {
+    await Asset.findByIdAndDelete(req.params.id);
+    res.status(201).send("Inward information is deleted");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong while deleting Inward in");
   }
 };

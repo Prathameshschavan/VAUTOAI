@@ -33,3 +33,26 @@ export const getOutward = async (req, res) => {
     res.status(500).send("something went wrong please try again");
   }
 };
+
+export const deleteOutward = async (req, res) => {
+  try {
+    await Outward.findByIdAndDelete(req.params.id);
+    res.status(201).send("Outward information is deleted");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong while deleting Outward");
+  }
+};
+
+export const updateOutward = async (req, res) => {
+  try {
+    const updatedOutward = await Outward.findOneAndUpdate({id:req.params.id},req.body); 
+    return res.status(201).json({
+      response: updatedOutward,
+      message: "Outward Updated successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong please try again");
+  }
+};

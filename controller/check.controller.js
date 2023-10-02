@@ -46,16 +46,18 @@ export const deleteCheckIN = async (req, res) => {
 
 export const getAllCheckIns = async (req, res) => {
   const q = req.query;
-
-  const filter = {
-    ...(q.isFinished && { isFinished: q.isFinished }),
-  };
-
   try {
-    const allCheckIns = await Check.find(filter);
-    // console.log(allCheckIns)
+    let allCheckIns = [];
+    if (q.sort) {
+      allCheckIns = await Check.find().sort({
+        checkOut: `${q.sort == "asc" ? -1 : 1}`,
+      });
+    } else {
+      allCheckIns = await Check.find();
+    }
     res.status(201).send(allCheckIns);
   } catch (error) {
+    console.log(error)
     res
       .status(500)
       .send("something went wrong while getting all the data check in");

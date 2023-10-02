@@ -26,6 +26,7 @@ export const addInward = async (req, res) => {
       message: "Inward added successfully",
     });
   } catch (error) {
+    console.log(error)
     res.status(500).send("something went wrong please try again");
   }
 };
