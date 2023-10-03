@@ -86,3 +86,34 @@ export const assignAsset = async (req, res) => {
     res.status(500).send("something went wrong while Assigning Asset");
   }
 };
+
+export const returnAssigned = async (req, res) => {
+  try {
+    const { id, returnedDate } = req.body;
+    const asset = await Asset.findOne({ _id: id });
+    let len = asset.assignee.length;
+    if (len > 0 && asset.assignee[len - 1].returnedDate !== "") {
+      return res.status(500).send({
+        message: "This Asset is Already returned",
+        asset,
+      });
+    }
+
+    if(returnedDate<= asset.assignee[len-1].assignDate){
+      return res.status(500).send({
+        message: "returned date is smaller than assign date",
+        asset,
+      });
+    }
+    asset.assignee[len-1].returnedDate=returnedDate;
+
+
+    const updatedAsset = await Asset.findByIdAndUpdate({ _id: id }, asset);
+    return res
+      .status(200)
+      .send({ message: "Asset Returned Successful", asset });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong while Returning Asset");
+  }
+};
