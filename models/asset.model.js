@@ -57,6 +57,10 @@ const assetSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  assignee:{
+    type: [{}],
+    required:false,
+  }
 },{
   timestamps:true
 });
