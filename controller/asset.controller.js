@@ -20,9 +20,7 @@ export const updateAsset = async (req, res) => {
     await Asset.findByIdAndUpdate(req.params.id, req.body);
     res.status(201).send("asset updated successfully");
   } catch (error) {
-    res
-      .status(500)
-      .send("something went wrong while updating the asset");
+    res.status(500).send("something went wrong while updating the asset");
   }
 };
 
@@ -55,5 +53,36 @@ export const deleteAsset = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send("something went wrong while deleting Asset");
+  }
+};
+
+export const assignAsset = async (req, res) => {
+  try {
+    const { id, employeeName, description, assignDate } = req.body;
+    const asset = await Asset.findOne({ _id: id });
+    let len = asset.assignee.length;
+    if (len > 0 && asset.assignee[len - 1].returnedDate === "") {
+      return res
+        .status(500)
+        .send(
+          "This Asset is Already assigned to somebody. First it need to be returned"
+        );
+    }
+
+    asset.assignee.push({
+      name: employeeName,
+      description,
+      assignDate,
+      returnedDate: "",
+    });
+
+    const updatedAsset = await Asset.findByIdAndUpdate({ _id: id }, asset);
+
+    return res
+      .status(200)
+      .send({ message: "Asset Assigning Successful", asset });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong while Assigning Asset");
   }
 };
