@@ -1,9 +1,15 @@
 import express from "express";
+import { addFloor,getFloor } from "../controller/master.controller.js";
+
 const router = express.Router();
 
-router.post("/add",);
+router.get("/", getFloor);
+router.post("/add", addFloor);
 
 export default router;
+
+
+
 /*
 
 
