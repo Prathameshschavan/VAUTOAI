@@ -5,8 +5,8 @@ const masterSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    Departments: {
-        type: [{}],
+    departments: {
+        type: [Object],
         required: true,
     },
 },{
