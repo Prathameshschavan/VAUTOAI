@@ -7,6 +7,7 @@ import userRoute from "./routes/user.route.js";
 import assetRoute from "./routes/asset.route.js";
 import outwardRouter from "./routes/outward.route.js";
 import recycleRouter from "./routes/recycle.route.js";
+import masterRouter from "./routes/master.route.js";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/api/auth", userRoute);
 app.use("/api/asset", assetRoute);
 app.use("/api/outward", outwardRouter);
 app.use("/api/recycle", recycleRouter);
+app.use("/api/master", masterRouter);
 
 const PORT = process.env.PORT;
 
