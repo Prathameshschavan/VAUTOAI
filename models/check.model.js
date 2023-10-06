@@ -5,15 +5,15 @@ const checkSchema = new Schema(
   {
     guest: {
       type: String,
-      required: true,
+      required: false,
     },
     personName: {
       type: String,
-      required: true,
+      required: false,
     },
     comingFrom: {
       type: String,
-      required: true,
+      required: false,
     },
     purpose: {
       type: String,
@@ -21,23 +21,23 @@ const checkSchema = new Schema(
     },
     floor: {
       type: String,
-      required: true,
+      required: false,
     },
     image: {
       type: String,
-      required: true,
+      required: false,
     },
     meetingWith: {
       type: String,
-      required: true,
+      required: false,
     },
     contactNo: {
       type: Number,
-      required: true,
+      required: false,
     },
     checkIn: {
       type: String,
-      required: true,
+      required: false,
     },
     checkOut: {
       type: String,
@@ -45,11 +45,11 @@ const checkSchema = new Schema(
     },
     department: {
       type: String,
-      required: true,
+      required: false,
     },
     remark: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {

@@ -5,35 +5,35 @@ const movementSchema = new Schema(
   {
     personName: {
       type: String,
-      required: true,
+      required: false,
     },
     workFor: {
       type: String,
-      required: true,
+      required: false,
     },
     gatePassNo: {
       type: String,
-      required: true,
+      required: false,
     },
     image: {
       type: String,
-      required: true,
+      required: false,
     },
     purpose: {
       type: String,
-      required: true,
+      required: false,
     },
     permissionBy: {
       type: String,
-      required: true,
+      required: false,
     },
     isCheckedOut: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     outTime: {
       type: String,
-      required: true,
+      required: false,
     },
     isCheckedIn: {
       type: Boolean,

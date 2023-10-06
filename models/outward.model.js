@@ -5,15 +5,15 @@ const outwardSchema = new Schema(
   {
     type: {
       type: String,
-      required: true,
+      required: false,
     },
     outDateAndTime: {
       type: String,
-      required: true,
+      required: false,
     },
     gatePassNo: {
       type: String,
-      required: true,
+      required: false,
     },
     materialdesc: {
       type: String,
@@ -21,19 +21,19 @@ const outwardSchema = new Schema(
     },
     quantity: {
       type: Number,
-      required: true,
+      required: false,
     },
     givenBy: {
       type: String,
-      required: true,
+      required: false,
     },
     takenBy: {
       type: String,
-      required: true,
+      required: false,
     },
     productImage: {
       type: String,
-      required: true,
+      required: false,
     },
     remark: {
       type: String,

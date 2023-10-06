@@ -5,11 +5,11 @@ const inwardSchema = new Schema(
   {
     type: {
       type: String,
-      required: true,
+      required: false,
     },
     personName: {
       type: String,
-      required: true,
+      required: false,
     },
     buyingDate: {
       type: String,
@@ -17,11 +17,11 @@ const inwardSchema = new Schema(
     },
     comingFrom: {
       type: String,
-      required: true,
+      required: false,
     },
     invoicePhoto: {
       type: String,
-      required: true,
+      required: false,
     },
     invoiceBillNo: {
       type: String,
@@ -29,7 +29,7 @@ const inwardSchema = new Schema(
     },
     productDetail: {
       type: [{}],
-      required: true,
+      required: false,
     },
     broughtBy: {
       type: String,
@@ -37,7 +37,7 @@ const inwardSchema = new Schema(
     },
     receivedBy: {
       type: String,
-      required: true,
+      required: false,
     },
     materialdesc: {
       type: String,
@@ -45,7 +45,7 @@ const inwardSchema = new Schema(
     },
     productImage: {
       type: String,
-      required: true,
+      required: false,
     },
     orderedBy: {
       type: String,

@@ -3,11 +3,11 @@ import mongoose, { Mongoose, Schema } from "mongoose";
 const recycleBinSchema = new Schema({
     path:{
         type:String,
-        required:true
+        required:false
     },
     item:{
         type:Object,
-        required:true
+        required:false
     }
 },{
     timestamps:true
