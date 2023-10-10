@@ -7,6 +7,14 @@ const inwardSchema = new Schema(
       type: String,
       required: false,
     },
+    productName: {
+      type: String,
+      required: false,
+    },
+    quantity: {
+      type: String,
+      required: false,
+    },
     personName: {
       type: String,
       required: false,
@@ -25,10 +33,6 @@ const inwardSchema = new Schema(
     },
     invoiceBillNo: {
       type: String,
-      required: false,
-    },
-    productDetail: {
-      type: [{}],
       required: false,
     },
     broughtBy: {

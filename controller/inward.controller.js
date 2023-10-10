@@ -4,26 +4,25 @@ import RecycleBin from "../models/recycleBin.js";
 
 export const addInward = async (req, res) => {
   try {
-    const { assetEntry } = req.body;
+    const { assetType,productDetail} = req.body;
     delete req.body.assetEntry;
-    const inwardData = new Inward(req.body);
-    const savedInward = await inwardData.save();
-    if (assetEntry) {
-      const { type, productName, quantity, buyingDate, invoicePhoto } =
+    delete req.body.productDetails; 
+    productDetail.map(async(product)=>{
+      const inwardData = new Inward({...req.body, productName: product.productName, quantity: product.quantity});
+      const savedInward = await inwardData.save();
+    })
+
+    if (assetType== "Asset") {
+      const { type, buyingDate, invoicePhoto } =
         req.body;
 
-      const assetData = new Asset({
-        type,
-        productName,
-        quantity,
-        buyingDate,
-        invoicePhoto,
-      });
-      await assetData.save();
+        productDetail.map(async(product)=>{
+          const assetData = new Asset({type:type , buyingDate:buyingDate, invoicePhoto:invoicePhoto,productName: product.productName, quantity: product.quantity});
+          const savedAsset = await assetData.save();
+        })
     }
 
     return res.status(201).json({
-      response: savedInward,
       message: "Inward added successfully",
     });
   } catch (error) {
