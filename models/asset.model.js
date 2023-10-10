@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const assetSchema = new mongoose.Schema({
   productName: {
     type: String,
-    required: true,
+    required: false,
   },
   quantity: {
     type: Number,
-    required: true,
+    required: false,
   },
   type: {
     type: String,
-    required: true,
+    required: false,
   },
   condition: {
     type: String,
@@ -47,7 +47,7 @@ const assetSchema = new mongoose.Schema({
   },
   invoicePhoto: {
     type: String,
-    required: true,
+    required: false,
   },
   remark: {
     type: String,
