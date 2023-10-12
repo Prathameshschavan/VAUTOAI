@@ -4,17 +4,14 @@ import RecycleBin from "../models/recycleBin.js";
 
 export const addOutward = async (req, res) => {
   try {
-    const { assetId } = req.body;
-    delete req.body._id;
-    const outwardData = new Outward(req.body);
-    const savedOutward = await outwardData.save();
-    let asset = await Asset.findOne({ _id: assetId });
-    if (asset) {
-      console.log(asset);
-      await Asset.findOneAndDelete({ _id: assetId });
-    }
+    const {productDetail} = req.body;
+    delete req.body.productDetails; 
+    productDetail.map(async(product)=>{
+      console.log(product);
+      const outwardData = new Outward({...req.body, productName: product.productName, quantity: product.quantity});
+      const savedOutward = await outwardData.save();
+    })
     return res.status(201).json({
-      response: savedOutward,
       message: "outward added successfully",
     });
   } catch (error) {

@@ -27,6 +27,10 @@ const outwardSchema = new Schema(
       type: String,
       required: false,
     },
+    productName: {
+      type: String,
+      required: false,
+    },
     givenBy: {
       type: String,
       required: false,
