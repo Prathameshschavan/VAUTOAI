@@ -7,6 +7,10 @@ const inwardSchema = new Schema(
       type: String,
       required: false,
     },
+    inwardTime: {
+      type: String,
+      required: false,
+    },
     productName: {
       type: String,
       required: false,

@@ -7,7 +7,11 @@ const outwardSchema = new Schema(
       type: String,
       required: false,
     },
-    outDateAndTime: {
+    outwardTime: {
+      type: String,
+      required: false,
+    },
+    returnDate: {
       type: String,
       required: false,
     },
