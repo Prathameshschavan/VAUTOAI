@@ -6,7 +6,7 @@ const assetSchema = new mongoose.Schema({
     required: false,
   },
   quantity: {
-    type: Number,
+    type: String,
     required: false,
   },
   type: {

@@ -20,7 +20,7 @@ const outwardSchema = new Schema(
       required: false,
     },
     quantity: {
-      type: Number,
+      type: String,
       required: false,
     },
     givenBy: {
