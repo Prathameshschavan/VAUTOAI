@@ -60,7 +60,11 @@ const assetSchema = new mongoose.Schema({
   assignee:{
     type: [{}],
     required:false,
-  }
+  },
+  department:{
+    type: String,
+    required:false,
+  },
 },{
   timestamps:true
 });

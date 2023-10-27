@@ -3,10 +3,16 @@ import RecycleBin from "../models/recycleBin.js";
 
 export const addAsset = async (req, res) => {
   try {
+    const {productDetail} = req.body;
+    delete req.body.productDetails; 
+    productDetail.map(async(product)=>{
+      const AssetData = new Asset({...req.body, productName: product.productName, quantity: product.quantity});
+      const savedAsset = await AssetData.save();
+    })
+
     const AssetData = new Asset(req.body);
     const savedAsset = await AssetData.save();
     return res.status(201).json({
-      response: savedAsset,
       message: "Asset added successfully",
     });
   } catch (error) {

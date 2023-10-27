@@ -35,15 +35,15 @@ export const addInward = async (req, res) => {
 export const getAllInwards = async (req, res) => {
   const q = req.query;
   try {
-    let allInward = [];
-    if (q.sort) {
-      allInward = await Inward.find().sort({
-        buyingDate: `${q.sort == "asc" ? -1 : 1}`,
-      });
-    } else {
-      allInward = await Inward.find();
-    }
-    res.status(201).send(allInward);
+    // let allInward = [];
+    // if (q.sort) {
+    //   allInward = await Inward.find().sort({
+    //     buyingDate: `${q.sort == "asc" ? -1 : 1}`,
+    //   });
+    // } else {
+    //   allInward = await Inward.find();
+    // }
+    res.status(201).send("allInward");
   } catch (error) {
     console.log(error);
     res
