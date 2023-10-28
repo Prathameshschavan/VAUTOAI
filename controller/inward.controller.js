@@ -38,10 +38,10 @@ export const getAllInwards = async (req, res) => {
     let allInward = [];
     if (q.sort) {
       allInward = await Inward.find().sort({
-        buyingDate: `${q.sort == "asc" ? -1 : 1}`,
+        inwardTime: `${q.sort == "asc" ? 1 : -1}`,
       });
     } else {
-      allInward = await Inward.find();
+      allInward = await Inward.find().sort({inwardTime:-1});
     }
     res.status(201).send(allInward);
   } catch (error) {
