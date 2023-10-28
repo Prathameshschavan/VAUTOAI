@@ -3,10 +3,13 @@ import RecycleBin from "../models/recycleBin.js";
 
 export const addMovementOut = async (req, res) => {
   try {
-    const movementOutData = new Movement(req.body);
-    const savedMovementOut = await movementOutData.save();
+    const {employees} = req.body;
+    delete req.body.employees;
+    employees.map(async(employee)=>{
+      const movementOutData = new Movement({...req.body, employeeName: employee.employeeName});
+      const savedMovementOut = await movementOutData.save();
+    })
     return res.status(201).json({
-      response: savedMovementOut,
       message: "Movement-Out added successfully",
     });
   } catch (error) {

@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const movementSchema = new Schema(
   {
-    personName: {
+    employeeName: {
       type: String,
       required: false,
     },
