@@ -11,7 +11,7 @@ const inwardSchema = new Schema(
       type: String,
       required: false,
     },
-    productName: {
+    companyName: {
       type: String,
       required: false,
     },
@@ -71,10 +71,15 @@ const inwardSchema = new Schema(
       type: String,
       required: false,
     },
+    billAmount: {
+      type: String,
+      required: false,
+    },
     remark: {
       type: String,
       required: false,
     },
+
   },
   {
     timestamps: true,

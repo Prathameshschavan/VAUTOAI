@@ -43,6 +43,10 @@ const outwardSchema = new Schema(
       type: String,
       required: false,
     },
+    authorisedBy: {
+      type: String,
+      required: false,
+    },
     remark: {
       type: String,
       required: false,
