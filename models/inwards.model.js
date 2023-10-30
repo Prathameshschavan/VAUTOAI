@@ -19,7 +19,7 @@ const inwardSchema = new Schema(
       type: String,
       required: false,
     },
-    personName: {
+    productName: {
       type: String,
       required: false,
     },
