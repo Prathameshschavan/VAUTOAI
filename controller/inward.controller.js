@@ -20,7 +20,7 @@ export const addInward = async (req, res) => {
           const assetData = new Asset({type:type , buyingDate:buyingDate, invoicePhoto:invoicePhoto,productName: product.productName, quantity: product.quantity});
           const savedAsset = await assetData.save();
         })
-    }
+    } 
 
     return res.status(201).json({
       message: "Inward added successfully",
