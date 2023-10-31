@@ -10,7 +10,7 @@ export const addInward = async (req, res) => {
     productDetail.map(async(product)=>{
       const inwardData = new Inward({...req.body, productName: product.productName, quantity: product.quantity});
       const savedInward = await inwardData.save();
-    })
+    })  
 
     if (assetType== "Asset") {
       const { type, buyingDate, invoicePhoto } =
