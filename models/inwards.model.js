@@ -11,7 +11,7 @@ const inwardSchema = new Schema(
       type: String,
       required: false,
     },
-    companyName: {
+    companyName: {  
       type: String,
       required: false,
     },
