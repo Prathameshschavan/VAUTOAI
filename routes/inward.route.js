@@ -16,3 +16,4 @@ router.get("/allCheckIns", getAllInwards);
 router.put("/updateCheckIn/:id", updateInwardIn);
 
 export default router;
+ 

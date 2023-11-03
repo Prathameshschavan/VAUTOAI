@@ -2,11 +2,19 @@ import Master from "../models/master.model.js";
 
 export const addFloor = async (req, res) => {
   try {
-    const floor = await Master.create(req.body);
+    const { floor } = req.body;
+    const isFloorExist = await Master.find({ floor: floor });
+    console.log(isFloorExist)
+    if (isFloorExist.length) {
+      return res.status(500).json({
+        message: "Floor Already Exist",
+      });
+    }
+    const newFloor = await Master.create(req.body);
 
     return res.status(200).json({
       message: "Floor Data Added Successfully",
-      response: floor,
+      response: newFloor,
     });
   } catch (error) {
     console.log(error);

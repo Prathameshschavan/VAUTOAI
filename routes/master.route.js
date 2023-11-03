@@ -15,21 +15,22 @@ export default router;
 
 floor:1
 departments:[
-IT:{
+{
+    id:"",
+    DepartmentName:"",
+    headName:"",
+    heademail:"",
+    headNumber:"",
+    emplyecount:""
+},
+{
     id:"",
     headName:"",
     heademail:"",
     headNumber:"",
     emplyecount:""
 },
-HR:{
-    id:"",
-    headName:"",
-    heademail:"",
-    headNumber:"",
-    emplyecount:""
-},
-VP:{
+{
     id:"",
     headName:"",
     heademail:"",
