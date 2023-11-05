@@ -4,9 +4,8 @@ export const addFloor = async (req, res) => {
   try {
     const { floor } = req.body;
     const isFloorExist = await Master.find({ floor: floor });
-    console.log(isFloorExist)
     if (isFloorExist.length) {
-      return res.status(500).json({
+      return res.status(409).json({
         message: "Floor Already Exist",
       });
     }
@@ -15,6 +14,19 @@ export const addFloor = async (req, res) => {
     return res.status(200).json({
       message: "Floor Data Added Successfully",
       response: newFloor,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong please try again");
+  }
+};
+
+export const deleteFloor = async (req, res) => {
+  
+  try {
+    const deletedFloor = await Master.findOneAndDelete({ floor: req.params.floor });
+    return res.status(200).json({
+      message: "Floor deleted Successfully",
     });
   } catch (error) {
     console.log(error);
