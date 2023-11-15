@@ -16,7 +16,7 @@ export const addCheckIn = async (req, res) => {
   try {
     console.log(req.body);
     const checkInData = new Check(req.body);
-    await sendEmail("prathameshschavan029@gmail.com");
+    await sendEmail(req.body.meetingWith);
     const savedCheckIn = await checkInData.save();
     return res.status(201).json({ response: savedCheckIn, message: "Check-In added successfully" });
   } catch (error) {
@@ -29,7 +29,7 @@ export const sendEmail = async (email) => {
   transports
   .sendMail({
     to: email,
-    from: "cprathamesh94@gmail.com",
+    from: "vautoaii@gmail.com",
     subject: "OTP Verification",
     html:`<div style="text-align:center">
     <h1>SomeOne is trying to meet you</h1>

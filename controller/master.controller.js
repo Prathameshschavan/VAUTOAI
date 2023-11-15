@@ -1,5 +1,5 @@
 import Master from "../models/master.model.js";
-
+import HeadDetails from "../models/email.model.js"
 export const addFloor = async (req, res) => {
   try {
     const { floor } = req.body;
@@ -9,6 +9,8 @@ export const addFloor = async (req, res) => {
         message: "Floor Already Exist",
       });
     }
+    req.body.departments.map( async(item)=> await HeadDetails.create({name:item.headName, email: item.heademail, number: item.headNumber})
+    )
     const newFloor = await Master.create(req.body);
 
     return res.status(200).json({
@@ -20,6 +22,7 @@ export const addFloor = async (req, res) => {
     res.status(500).send("something went wrong please try again");
   }
 };
+
 
 export const deleteFloor = async (req, res) => {
   
@@ -41,6 +44,21 @@ export const getFloor = async (req, res) => {
     return res.status(200).json({
       message: "All Floor Data Sent Successfully",
       response: allfloorData,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("something went wrong please try again");
+  }
+};
+
+
+export const getHeadDetail = async (req, res) => {
+  try {
+    const headDetail = await HeadDetails.find();
+
+    return res.status(200).json({
+      message: "All head details Data Sent Successfully",
+      response: headDetail,
     });
   } catch (error) {
     console.log(error);
