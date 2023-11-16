@@ -39,11 +39,11 @@ export const deleteFloor = async (req, res) => {
 
 export const getFloor = async (req, res) => {
   try {
-    const allfloorData = await Master.find();
+    const allFloorData = await Master.find().sort({ floor: 1 });
 
     return res.status(200).json({
       message: "All Floor Data Sent Successfully",
-      response: allfloorData,
+      response: allFloorData,
     });
   } catch (error) {
     console.log(error);
