@@ -7,18 +7,21 @@ dotenv.config();
 const transports = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "cprathamesh94@gmail.com",
+    user: "vautoaii@gmail.com",
     pass: process.env.GOOGLE_PASS,
   },
 });
+
 
 export const addCheckIn = async (req, res) => {
   try {
     console.log(req.body);
     const checkInData = new Check(req.body);
-    await sendEmail(req.body.meetingWith);
+    await sendEmail(req.body.email);
     const savedCheckIn = await checkInData.save();
-    return res.status(201).json({ response: savedCheckIn, message: "Check-In added successfully" });
+    return res
+      .status(201)
+      .json({ response: savedCheckIn, message: "Check-In added successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).send("something went wrong please try again");
@@ -27,25 +30,25 @@ export const addCheckIn = async (req, res) => {
 
 export const sendEmail = async (email) => {
   transports
-  .sendMail({
-    to: email,
-    from: "vautoaii@gmail.com",
-    subject: "OTP Verification",
-    html:`<div style="text-align:center">
-    <h1>SomeOne is trying to meet you</h1>
-    <p>Please confirm your availabilty.....</p>
-    <button>OK</button>
-    </div>`
-  })
-  .then((result) => {
-    console.log(result)
-    // req.session.OTP = otp;
-    // res.send("Email Sent");
-  })
-  .catch((err) => {
-    console.log(err)
-    // res.send("Something wrong Happened")
-  });
+    .sendMail({
+      to: email,
+      from: "vautoaii@gmail.com",
+      subject: "Vistor Verification",
+      html: ` <div style="text-align:center;border:2px solid black; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; border-radius:10px; padding:50px ;">
+      <h1>Someone Is Trying To Meet You</h1>
+      <p>Please Confirm Your Availabilty.....</p>
+      <button style="padding:10px 20px; border-radius:10px; background:black; color: white; border:none;">OK</button>
+      </div>`,
+    })
+    .then((result) => {
+      console.log(result);
+      // req.session.OTP = otp;
+      // res.send("Email Sent");
+    })
+    .catch((err) => {
+      console.log(err);
+      // res.send("Something wrong Happened")
+    });
 };
 
 export const addCheckOut = async (req, res) => {
