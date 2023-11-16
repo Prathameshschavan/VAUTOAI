@@ -6,6 +6,7 @@ dotenv.config();
 
 const transports = nodemailer.createTransport({
   service: "gmail",
+  secure: false,
   auth: {
     user: "vautoaii@gmail.com",
     pass: process.env.GOOGLE_PASS,
