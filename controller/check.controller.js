@@ -5,21 +5,31 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const transports = nodemailer.createTransport({
-  service: "gmail",
-  secure: false,
+  // service: "gmail",
+  // secure: false,
+  // auth: {
+  //   user: "vautoaii@gmail.com",
+  //   pass: "siko ffco lrkz bzbq",
+  // }, 
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: "vautoaii@gmail.com",
-    pass: process.env.GOOGLE_PASS,
-  },
+      type: 'OAuth2',
+      user: 'vautoaii@gmail.com',
+      clientId: '1096024481727-uipnbge434i692jmc036lhqa83l52ile.apps.googleusercontent.com',
+      clientSecret: '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',
+      refreshToken: '1//04L7tAJWbJjyoCgYIARAAGAQSNwF-L9IrRipA58iHn7sSJTwul-ib8KIsM1tVLy4VQFkRQORyiOLHTS_lV7HUiOykCrnPXB2BCa0',
+      accessToken: 'ya29.a0AfB_byBRBxXGdxzWRfNiAKX-yGkh3QnYZJxwMZNZxw_pGUaGh_ndRKXP8PaOt95OBv5ltI8Bgx-JGT9FN6UtSD6GZ_1SearAtKzIt_QyUcI2D5cSh5fonM51E1Q_4xqacCgtF2n_hie0Ucvys1C4toitKyYK_3jkpINYaCgYKAZcSARESFQHGX2MiSItDatRIUtyRtwYQ2kl-Zg0171'
+  }
 });
 
 
 export const addCheckIn = async (req, res) => {
   try {
-    console.log(req.body);
     const checkInData = new Check(req.body);
     await sendEmail(req.body.email);
-    const savedCheckIn = await checkInData.save();
+    const savedCheckIn = await checkInData.save(); 
     return res
       .status(201)
       .json({ response: savedCheckIn, message: "Check-In added successfully" });
