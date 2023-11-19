@@ -11,12 +11,12 @@ export const register = async (req, res) => {
     let { name, email, password } = req.body;
     let isWhitelist = await Whitelist.findOne({email});
     if(!isWhitelist){
-      return res.status(500).send({ message: "This account do not have permission, plz connect administration" });
+      return res.status(409).send({ message: "This account do not have permission, plz connect administration" });
 
     }
     let userFlag = await User.findOne({ email });
     if (userFlag) {
-      return res.status(500).send({ message: "User already exists." });
+      return res.status(409).send({ message: "User already exists." });
     }
 
     let response = await User.create({
