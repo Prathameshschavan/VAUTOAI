@@ -35,7 +35,7 @@ export const addCheckIn = async (req, res) => {
 };
 
 export const sendEmail = async (email) => {
-  transports
+  await transports
     .sendMail({
       to: email,
       from: "vautoaii@gmail.com",
@@ -48,11 +48,13 @@ export const sendEmail = async (email) => {
     })
     .then((result) => {
       console.log(result);
+      console.log("Email sent successfully");
       // req.session.OTP = otp;
       // res.send("Email Sent");
     })
     .catch((err) => {
       console.log(err);
+      console.log("Email sent successfully");
       // res.send("Something wrong Happened")
     });
 };
