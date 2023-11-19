@@ -23,7 +23,7 @@ const transports = nodemailer.createTransport({
 export const addCheckIn = async (req, res) => {
   try {
     const checkInData = new Check(req.body);
-    await sendEmail(req.body.email);
+    await sendEmail(req.body.email, req.body?.personName, req.body?.comingFrom, req.body?.purpose, req.body?.meetingWith);
     const savedCheckIn = await checkInData.save(); 
     return res
       .status(201)
@@ -34,17 +34,22 @@ export const addCheckIn = async (req, res) => {
   }
 };
 
-export const sendEmail = async (email) => {
+export const sendEmail = async (email, personName, comingFrom, purpose, meetingWith) => {
   await transports
     .sendMail({
       to: email,
       from: "vautoaii@gmail.com",
-      subject: "Vistor Verification",
-      html: ` <div style="text-align:center;border:2px solid black; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; border-radius:10px; padding:50px ;">
-      <h1>Someone Is Trying To Meet You</h1>
-      <p>Please Confirm Your Availabilty.....</p>
-      <button style="padding:10px 20px; border-radius:10px; background:black; color: white; border:none;">OK</button>
-      </div>`,
+      subject: `Visitor Notification: ${personName} from ${comingFrom} at Security Desk`,
+        html: `  
+        <div>
+            <p>Dear ${meetingWith},</p>
+            <p>
+            I hope this message finds you well. This is to inform you that <strong>'${personName}'</strong> from
+            <strong>'${comingFrom}'</strong> is currently at the security desk, expressing a desire to meet. The 
+            purpose of the meeting is related to <strong>'${purpose}'</strong>.
+            </p>
+            <p>Best Regards,<br/><em><strong>Vautoai</strong></em></p>
+        </div>`,
     })
     .then((result) => {
       console.log(result);
