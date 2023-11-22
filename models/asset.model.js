@@ -5,6 +5,10 @@ const assetSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  type: {
+    type: String,
+    required: false,
+  },
   quantity: {
     type: String, 
     required: false,
