@@ -15,6 +15,10 @@ const outwardSchema = new Schema(
       type: String,
       required: false,
     },
+    returnType: {
+      type: String,
+      required: false,
+    },
     gatePassNo: {
       type: String,
       required: false,

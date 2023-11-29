@@ -63,6 +63,10 @@ const inwardSchema = new Schema(
       type: String,
       required: false,
     },
+    returnType: {
+      type: String,
+      required: false,
+    },
     sendBy: {
       type: String,
       required: false,

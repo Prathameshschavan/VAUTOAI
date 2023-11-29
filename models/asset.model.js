@@ -13,7 +13,7 @@ const assetSchema = new mongoose.Schema({
     type: String, 
     required: false,
   },
-  type: {
+  returnType: {
     type: String,
     required: false,
   },
