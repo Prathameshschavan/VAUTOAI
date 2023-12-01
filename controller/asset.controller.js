@@ -9,9 +9,6 @@ export const addAsset = async (req, res) => {
       const AssetData = new Asset({...req.body, productName: product.productName, quantity: product.quantity});
       const savedAsset = await AssetData.save();
     })
-
-    const AssetData = new Asset(req.body);
-    const savedAsset = await AssetData.save();
     return res.status(201).json({
       message: "Asset added successfully",
     });
@@ -41,6 +38,7 @@ export const getAsset = async (req, res) => {
     } else {
       allAsset = await Asset.find();
     }
+    console.log(allAsset);
     res.status(201).send(allAsset);
   } catch (error) {
     console.log(error);

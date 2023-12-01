@@ -4,23 +4,33 @@ import RecycleBin from "../models/recycleBin.js";
 
 export const addInward = async (req, res) => {
   try {
-    const { assetType,productDetail} = req.body;
+    const { assetType, productDetail } = req.body;
     delete req.body.assetEntry;
-    delete req.body.productDetails; 
-    productDetail.map(async(product)=>{
-      const inwardData = new Inward({...req.body, productName: product.productName, quantity: product.quantity});
+    delete req.body.productDetails;
+    productDetail.map(async (product) => {
+      const inwardData = new Inward({
+        ...req.body,
+        productName: product.productName,
+        quantity: product.quantity,
+      });
       const savedInward = await inwardData.save();
-    })  
+    });
 
-    if (assetType== "Asset") {
-      const { type, buyingDate, invoicePhoto } =
-        req.body;
+    if (assetType == "Asset") {
+      const { returnType, buyingDate, invoicePhoto, remark } = req.body;
 
-        productDetail.map(async(product)=>{
-          const assetData = new Asset({type:type , buyingDate:buyingDate, invoicePhoto:invoicePhoto,productName: product.productName, quantity: product.quantity});
-          const savedAsset = await assetData.save();
-        })
-    } 
+      productDetail.map(async (product) => {
+        const assetData = new Asset({
+          buyingDate: buyingDate,
+          invoicePhoto: invoicePhoto,
+          productName: product.productName,
+          quantity: product.quantity,
+          returnType: returnType,
+          remark : remark
+        });
+        const savedAsset = await assetData.save();
+      });
+    }
 
     return res.status(201).json({
       message: "Inward added successfully",
@@ -31,7 +41,6 @@ export const addInward = async (req, res) => {
   }
 };
 
-
 export const getAllInwards = async (req, res) => {
   const q = req.query;
   try {
@@ -41,7 +50,7 @@ export const getAllInwards = async (req, res) => {
         inwardTime: `${q.sort == "asc" ? 1 : -1}`,
       });
     } else {
-      allInward = await Inward.find().sort({inwardTime:-1});
+      allInward = await Inward.find().sort({ inwardTime: -1 });
     }
     res.status(201).send(allInward);
   } catch (error) {
