@@ -17,10 +17,11 @@ export const addInward = async (req, res) => {
     });
 
     if (assetType == "Asset") {
-      const { returnType, buyingDate, invoicePhoto, remark } = req.body;
+      const { type,returnType, buyingDate, invoicePhoto, remark } = req.body;
 
       productDetail.map(async (product) => {
         const assetData = new Asset({
+          type: type,
           buyingDate: buyingDate,
           invoicePhoto: invoicePhoto,
           productName: product.productName,
