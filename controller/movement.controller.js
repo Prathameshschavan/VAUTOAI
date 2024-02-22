@@ -20,13 +20,14 @@ export const addMovementOut = async (req, res) => {
 
 export const addMovementIn = async (req, res) => {
   try {
-    const { _id, inTime , isCheckedIn} = req.body;
+    const { _id, inTime, isCheckedIn, category } = req.body;
     const movementInData = await Movement.findOneAndUpdate(
       { _id },
-      { $set: { inTime: inTime , isCheckedIn: isCheckedIn} }
+      { $set: { inTime: inTime, isCheckedIn: isCheckedIn, category: category } }
     );
     movementInData.inTime = inTime;
     movementInData.isCheckedIn = isCheckedIn; 
+    movementInData.category = category;
     return res.status(201).json({
       response: movementInData,
       message: "Movement-Out added successfully",

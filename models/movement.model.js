@@ -47,6 +47,10 @@ const movementSchema = new Schema(
       type: String,
       required: false,
     },
+    category: {
+      type: String,
+      required: false,
+    }
   },
   {
     timestamps: true,
